@@ -18,38 +18,38 @@ sleep 5
 
 #!/bin/bash
 
-read -p "Masukkan nama screen: " screen_name
+read -p "Enter screen name: " screen_name
 
 if [[ -z "$screen_name" ]]; then
-    echo "Nama screen tidak boleh kosong."
+    echo "Screen name cannot be empty.."
     exit 1
 fi
 
-echo "Membuat sesi screen dengan nama '$screen_name'..."
+echo "Create a screen session with a name '$screen_name'..."
 screen -S "$screen_name" -dm
 
-echo "Menjalankan perintah 'aios-cli start' di dalam sesi screen '$screen_name'..."
+echo "Running the 'aios-cli start' command inside a screen session '$screen_name'..."
 screen -S "$screen_name" -X stuff "aios-cli start\n"
 
 sleep 5
 
-echo "Keluar dari sesi screen '$screen_name'..."
+echo "Exit screen session '$screen_name'..."
 screen -S "$screen_name" -X detach
 sleep 5
 
 if [[ $? -eq 0 ]]; then
-    echo "Screen dengan nama '$screen_name' berhasil dibuat dan menjalankan perintah aios-cli start."
+    echo "Screen with name '$screen_name' was successfully created and ran the aios-cli start command.."
 else
-    echo "Gagal membuat screen."
+    echo "Failed to create screen."
     exit 1
 fi
 
 sleep 2
 
-echo "Masukkan private key Anda (akhiri dengan CTRL+D):"
+echo "Enter your private key (end with CTRL+D):"
 cat > .pem
 
-echo "Menjalankan perintah import-keys dengan file.pem..."
+echo "Running the import-keys command with the .pem file..."
 aios-cli hive import-keys ./.pem
 
 sleep 5
