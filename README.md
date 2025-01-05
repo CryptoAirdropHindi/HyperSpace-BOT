@@ -13,3 +13,7 @@ source /root/.bashrc
 git clone https://github.com/CryptoAirdropHindi/HyperSpace-BOT.git
 cd HyperSpace-BOT
 ```
+# Run the script:
+```
+bash auto.sh
+```
